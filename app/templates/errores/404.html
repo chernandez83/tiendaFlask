@@ -1,0 +1,27 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404 - Página no encontrada</title>
+</head>
+<body>
+    
+</body>
+</html>-->
+{% extends './base.html' %}
+
+{% block title %}
+Error 404 - Página no encontrada
+{% endblock %}
+
+{% block body %}
+{% include './nav.html' %}
+<div class="container py-3">
+    {% block container %}
+        <h1>Recurso no encontrado</h1>
+    {% endblock %}
+</div>
+
+{% endblock %}

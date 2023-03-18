@@ -1,0 +1,41 @@
+{% extends './body.html' %}
+
+{% block title %}
+Libros
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    .table-hover tbody tr:hover td {
+        background: #af272f66;
+    }
+</style>
+{% endblock %}
+
+{% block container %}
+<h2>Libros en existencia</h2>
+<div class="table-responsive ">
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ISBN</th>
+                <th>T&iacute;tulo</th>
+                <th>Autor</th>
+                <th>A&ntilde;o</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in data.libros %}
+            <tr>
+                <td> {{ libro.isbn }} </td>
+                <td> {{ libro.titulo }} </td>
+                <td> {{ libro.autor.nombre_completo() }} </td>
+                <td> {{ libro.anoedicion }} </td>
+                <td> {{ libro.precio }} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,3 +1,5 @@
 .\env\Scripts\activate
 
 python .\manage.py run --debug
+
+pip install mysqlclient flask-mysql flask-mysqldb

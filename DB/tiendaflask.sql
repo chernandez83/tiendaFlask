@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2023 at 08:13 PM
+-- Generation Time: Mar 20, 2023 at 12:56 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -34,6 +34,16 @@ CREATE TABLE `autor` (
   `fechanacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Almacena los datos de los autores';
 
+--
+-- Dumping data for table `autor`
+--
+
+INSERT INTO `autor` (`ID`, `apellidos`, `nombres`, `fechanacimiento`) VALUES
+(1, 'Vallejo Mendoza', 'César Abraham', '1892-03-16'),
+(2, 'Vargas Llosa', 'Jorge Mario Pedro', '1936-03-28'),
+(3, 'Alegría Bazán', 'Ciro', '1909-11-04'),
+(4, 'García Márquez', 'Gabriel José de la Concordia', '1927-03-06');
+
 -- --------------------------------------------------------
 
 --
@@ -55,11 +65,31 @@ CREATE TABLE `compra` (
 
 CREATE TABLE `libro` (
   `ISBN` char(12) NOT NULL,
-  `Titutlo` varchar(100) NOT NULL,
+  `Titulo` varchar(100) NOT NULL,
   `autor_id` smallint(4) UNSIGNED NOT NULL,
   `anoedicion` year(4) NOT NULL,
   `precio` decimal(3,0) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Almacena los datos de los libros';
+
+--
+-- Dumping data for table `libro`
+--
+
+INSERT INTO `libro` (`ISBN`, `Titulo`, `autor_id`, `anoedicion`, `precio`) VALUES
+('238874100138', 'Conversación en La Catedral', 2, 1951, '70'),
+('383370912281', 'El mundo es ancho y ajeno', 3, 1941, '65'),
+('480129403571', 'La ciudad y los perros', 2, 1963, '81'),
+('483240184226', 'La serpiente de oro', 3, 1935, '85'),
+('589120131047', 'Los perros hambrientos', 3, 1939, '31'),
+('591338770183', 'Paco Yunque', 1, 1951, '55'),
+('661984010128', 'El general en su laberinto', 4, 1989, '110'),
+('683425019133', 'El coronel no tiene quien le escriba', 4, 1961, '42'),
+('762841019387', 'Cien años de soledad', 4, 1967, '75'),
+('890366138239', 'La fiesta del Chivo', 2, 2000, '30'),
+('892014771852', 'Poemas humanos', 1, 1939, '120'),
+('930281938211', 'El amor en los tiempos del cólera', 4, 1985, '38'),
+('978318472263', 'Los heraldos negros', 1, 1919, '48'),
+('981402938251', 'La casa verde', 2, 1966, '105');
 
 -- --------------------------------------------------------
 
@@ -89,9 +119,18 @@ INSERT INTO `tipousuario` (`ID`, `Nombre`) VALUES
 CREATE TABLE `usuario` (
   `ID` smallint(3) UNSIGNED NOT NULL,
   `usuario` varchar(20) NOT NULL,
-  `password` char(94) NOT NULL,
+  `password` char(102) NOT NULL,
   `tipousuario_id` tinyint(1) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Alamacena los usuarios';
+
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`ID`, `usuario`, `password`, `tipousuario_id`) VALUES
+(2, 'admin', 'pbkdf2:sha256:260000$TIb5dcVia6HCEG3H$dff2ccb0e4bf813076393e3d72ec3a89133aa29df18e5ed3d2bead2630b63c70', 1),
+(3, 'Cut', 'pbkdf2:sha256:260000$scMIShtKgBv0Wac5$4e8a022e23ed17e0b383c2ed93033253c91e03c6af40c296a040b733c66d4e01', 2),
+(4, 'Uriel', 'pbkdf2:sha256:260000$jMTXdF6vXmAJ846T$adc3a76d90527b432470ca1ef4b3b2b1ac9a0374f6f386cad85eb0d6563a9be1', 2);
 
 --
 -- Indexes for dumped tables
@@ -139,7 +178,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `ID` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tipousuario`
@@ -151,7 +190,7 @@ ALTER TABLE `tipousuario`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

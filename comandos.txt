@@ -2,4 +2,10 @@
 
 python .\manage.py run --debug
 
+virtualenv -p python3 env
+
+.\env\Scripts\activate
+
+pip install flask
 pip install mysqlclient flask-mysql flask-mysqldb
+pip install flask-wtf flask-login

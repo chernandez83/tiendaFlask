@@ -27,18 +27,19 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        usuario = Usuario(
-            None, request.form['usuario'], request.form['password'], None)
+        usuario = Usuario(None, request.form['usuario'], request.form['password'], None)
         usuario_logueado = ModeloUsuario.login(db, usuario)
         if usuario_logueado is not None:
             login_user(usuario_logueado)
             return redirect(url_for('index'))
     return render_template('auth/login.html')
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
 
 @app.route('/libros')
 def libros():

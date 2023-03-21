@@ -11,4 +11,4 @@ class Usuario(UserMixin):
     def encriptar_password(password):
         encriptado = generate_password_hash(password)
         coincide = check_password_hash(encriptado, password)
-        return f'Encriptrado {encriptado} <br><br> Válido: {coincide}'
+        return f'Encriptrado: {encriptado} <br><br> Válido: {coincide}'

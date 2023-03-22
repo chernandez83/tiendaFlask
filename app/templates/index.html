@@ -6,8 +6,20 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong style="font-size: 14px;">{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
         <h1>¡Bienvenid@s!</h1>
-        <h2>Gasten mucho dinero aquí por favor.</h2>
+        <h2>Gasten mucho dinero aquí por favor.</h2>        
     </div>
 </div>
 

@@ -1,11 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import LoginManager, login_user, logout_user, login_required
 
 from .models.ModeloLibro import ModeloLibro
 from .models.ModeloUsuario import ModeloUsuario
 from .models.entities.Usuario import Usuario
+
+from .consts import *
 
 app = Flask(__name__)
 
@@ -20,6 +22,7 @@ def load_user(id):
 
 
 @app.route('/')
+@login_required
 def index():
     return render_template('index.html')
 
@@ -31,17 +34,22 @@ def login():
         usuario_logueado = ModeloUsuario.login(db, usuario)
         if usuario_logueado is not None:
             login_user(usuario_logueado)
+            flash(f'{usuario.usuario.upper()}, {MENSAJE_BIENVENIDA}')
             return redirect(url_for('index'))
+        else:
+            flash(LOGIN_INVALIDO, 'warning')
     return render_template('auth/login.html')
 
 
 @app.route('/logout')
 def logout():
     logout_user()
+    flash(LOGOUT_EXITOSO, 'success')
     return redirect(url_for('login'))
 
 
 @app.route('/libros')
+@login_required
 def libros():
     try:
         libros = ModeloLibro.listar_libros(db)
@@ -52,13 +60,15 @@ def libros():
     except Exception as ex:
         raise Exception(ex)
 
-
 def error404(error):
     return render_template('errores/404.html'), 404
 
+def pagina_no_autorizada(error):
+    return redirect(url_for('login'))
 
 def inicializar_app(config):
     app.config.from_object(config)
     csrf.init_app(app)
+    app.register_error_handler(401, pagina_no_autorizada)
     app.register_error_handler(404, error404)
     return app

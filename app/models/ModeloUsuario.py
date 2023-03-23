@@ -1,5 +1,3 @@
-from werkzeug.security import check_password_hash
-
 from .entities.Usuario import Usuario
 from .entities.TipoUsuario import TipoUsuario
 
@@ -17,7 +15,7 @@ class ModeloUsuario:
             cursor.execute(sql)
             data = cursor.fetchone()
             # print(data)
-            if data is not None and check_password_hash(data[2], usuario.password):
+            if data is not None and Usuario.verificar_password(data[2], usuario.password):
                 return Usuario(data[0], data[1], None, data[3])
             else:
                 return None

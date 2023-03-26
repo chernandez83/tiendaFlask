@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 from .models.ModeloLibro import ModeloLibro
 from .models.ModeloUsuario import ModeloUsuario
+from .models.ModeloCompra import ModeloCompra
+
 from .models.entities.Usuario import Usuario
+from .models.entities.Libro import Libro
+from .models.entities.Compra import Compra
 
 from .consts import *
 
@@ -76,7 +80,24 @@ def libros():
         }
         return render_template('listado_libros.html', data=data)
     except Exception as ex:
-        raise Exception(ex)
+        #raise Exception(ex)
+        return render_template('errores/error.html', mensaje=format(ex))
+
+
+@app.route('/comprarLibro', methods=['POST'])
+@login_required
+def comprarLibro():
+    data_request = request.get_json()
+    # print(data_request)
+    data = {}
+    try:
+        libro = Libro(data_request['isbn'], None, None, None, None)
+        compra = Compra(None, libro, current_user)
+        data['exito'] = ModeloCompra.registrar_compra(db, compra)
+    except Exception as ex:
+        data['mensaje'] = format(ex)
+        data['exito'] = False
+    return jsonify(data)
 
 
 def error404(error):

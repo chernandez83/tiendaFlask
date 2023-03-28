@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2023 at 12:56 AM
+-- Generation Time: Mar 28, 2023 at 05:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -56,6 +56,19 @@ CREATE TABLE `compra` (
   `usuario_id` smallint(3) UNSIGNED NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Almacena las compras';
+
+--
+-- Dumping data for table `compra`
+--
+
+INSERT INTO `compra` (`UUID`, `ISBN`, `usuario_id`, `fecha`) VALUES
+('06f9d5a1-cb6b-11ed-8398-7824af88fa76', '892014771852', 3, '2023-03-25 18:13:25'),
+('1deedac1-cb6b-11ed-8398-7824af88fa76', '589120131047', 3, '2023-03-25 18:14:04'),
+('6e671e86-cd15-11ed-9985-7824af88fa76', '383370912281', 3, '2023-03-27 21:05:44'),
+('81fa98d8-cb6b-11ed-8398-7824af88fa76', '930281938211', 4, '2023-03-25 18:16:52'),
+('842c0c95-cb6b-11ed-8398-7824af88fa76', '591338770183', 4, '2023-03-25 18:16:55'),
+('8e916408-cd11-11ed-9985-7824af88fa76', '762841019387', 3, '2023-03-27 20:38:00'),
+('e8039e66-cd15-11ed-9985-7824af88fa76', '383370912281', 4, '2023-03-27 21:09:08');
 
 -- --------------------------------------------------------
 

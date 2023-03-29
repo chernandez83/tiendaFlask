@@ -52,17 +52,23 @@ def logout():
 def index():
     if current_user.is_authenticated:
         if current_user.tipousuario.id == 1:
-            libros_vendidos = []
-            data = {
-                'titulo': 'Libros Vendidos',
-                'libros_vendidos': libros_vendidos
-            }
+            try:
+                libros_vendidos = ModeloLibro.listar_libros_vendidos(db)
+                data = {
+                    'titulo': 'Libros Vendidos',
+                    'libros_vendidos': libros_vendidos
+                }
+            except Exception as ex:
+                return render_template('errores/error.html', mensaje=format(ex))
         else:
-            compras = []
-            data = {
-                'titulo': 'Mis Compras',
-                'compras': compras
-            }
+            try:
+                compras = ModeloCompra.listar_compras_usuario(db, current_user)
+                data = {
+                    'titulo': 'Mis Compras',
+                    'compras': compras
+                }
+            except Exception as ex:
+                return render_template('errores/error.html', mensaje=format(ex))
         return render_template('index.html', data=data)
     return redirect(url_for('login'))
 

@@ -37,7 +37,12 @@
                     }
                     return response.json();
                 }).then(data => {
-                    notificationSwal('¡Yay!', 'Libro comprado', 'success', 'OK');
+                    if (data.exito) {
+                        notificationSwal('¡Yay!', 'Libro comprado', 'success', 'OK');
+                    } else {
+                        notificationSwal('¡Alerta!', data.mensaje, 'warning', 'OK');
+                    }
+                    
                 }).catch(error => {
                     notificationSwal('Error', error, 'error', 'Cerrar');
                 });

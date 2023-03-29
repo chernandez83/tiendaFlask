@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class Compra:
 
     def __init__(self, uuid, libro, usuario, fecha=None):
@@ -5,3 +7,7 @@ class Compra:
         self.libro = libro
         self.usuario = usuario
         self.fecha = fecha
+        
+        
+    def formatted_date(self):
+        return datetime.strftime(self.fecha, '%d/%m/%Y %H:%M')

@@ -9,3 +9,4 @@ virtualenv -p python3 env
 pip install flask
 pip install mysqlclient flask-mysql flask-mysqldb
 pip install flask-wtf flask-login
+pip install flask_mail python-decouple python-dotenv

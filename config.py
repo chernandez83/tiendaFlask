@@ -9,11 +9,12 @@ class DevelopmentConfig(Config):
     MYSQL_USER='root'
     #MYSQL_PASSWORD='123456'
     MYSQL_DB='tiendaflask'
-    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_SERVER = 'smtp.sendgrid.net'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'cut.netjliz@gmail.com'
+    MAIL_USERNAME = config('MAIL_USERNAME')
     MAIL_PASSWORD = config('MAIL_PASSWORD')
+    MAIL_SENDER = config('MAIL_SENDER')
 
 config = {
     'development': DevelopmentConfig,

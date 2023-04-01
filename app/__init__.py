@@ -104,7 +104,8 @@ def comprarLibro():
         libro = ModeloLibro.leer_libro(db, data_request['isbn'])
         compra = Compra(None, libro, current_user)
         data['exito'] = ModeloCompra.registrar_compra(db, compra)
-        notificacion_compra(mail, current_user, libro)
+        #notificacion_compra(mail, current_user, libro) # Envío normal
+        notificacion_compra(app, mail, current_user, libro) # Envío async
     except Exception as ex:
         data['mensaje'] = format(ex)
         data['exito'] = False
